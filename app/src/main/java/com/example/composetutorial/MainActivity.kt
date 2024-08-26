@@ -46,17 +46,32 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     LazyRow(
-        modifier = Modifier.background(Color.Red)
+        modifier = Modifier
+            .clickable {
+                println("LazyRowClicked")
+            }
+            .background(Color.Red)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+        verticalAlignment = Alignment.CenterVertically,
 
+        ) {
         items(12) {
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier
+                    .clickable {
+                        println("ImageClicked")
+                    }
             )
-            Icon(imageVector = Icons.Default.Add, contentDescription = null)
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = null,
+                modifier = Modifier
+                    .clickable {
+                        println("IconClicked")
+                    }
+            )
         }
     }
 }
