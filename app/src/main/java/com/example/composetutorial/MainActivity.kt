@@ -37,7 +37,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
@@ -45,6 +54,15 @@ import com.example.composetutorial.ui.theme.ComposeTutorialTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        var fontFamily = FontFamily(
+//            Font(R.font.lexend_thin,FontWeight.Thin),
+//            Font(R.font.lexend_light,FontWeight.Light),
+//            Font(R.font.lexend_extrabold,FontWeight.ExtraBold),
+//            Font(R.font.lexend_bold,FontWeight.Bold),
+//            Font(R.font.lexend_semibold,FontWeight.SemiBold),
+//            Font(R.font.lexend_medium,FontWeight.Medium),
+//            Font(R.font.lexend_regular,FontWeight.Normal),
+//        )
         setContent {
             ComposeTutorialTheme {
                 var name by remember {
@@ -65,7 +83,10 @@ class MainActivity : ComponentActivity() {
                         .padding(16.dp)
                 ) {
 
-                    ImageCard(painter = painter, contentDescription = description, title = title)
+                    // ImageCard(painter = painter, contentDescription = description, title = title)
+                    TextStyling(text = "Alfredo")
+
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -177,5 +198,41 @@ fun ImageCard(
                 )
             }
         }
+    }
+
+}
+
+
+@Composable
+fun TextStyling(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF101010))
+    ) {
+        Text(
+            text = buildAnnotatedString {
+
+               //Style individual parts of text :
+                withStyle(
+                    style = SpanStyle(
+                        color = Color.Green,
+                        fontSize = 30.sp
+                    )
+                ){
+                    append("J")
+                } // withStyle end here below texts will be in default style.
+                append("etpack ")
+            },
+            color = Color.White,
+            fontSize = 30.sp,
+            fontFamily = FontFamily(Font(R.font.lexend_thin)),
+            fontStyle = FontStyle.Italic,
+            textAlign = TextAlign.Center,
+            textDecoration = TextDecoration.Underline
+        )
     }
 }
