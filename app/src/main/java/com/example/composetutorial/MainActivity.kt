@@ -4,7 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollScope
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -50,6 +57,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,17 +82,33 @@ class MainActivity : ComponentActivity() {
 
                 var painter = painterResource(id = R.drawable.ic_launcher_foreground)
                 var description = "Foreground vector"
-                val title = "Permit me "
-
+                val title = "Permit me"
+                val color = remember {
+                    mutableStateOf(Color.Yellow)
+                }
 
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+
                 ) {
 
                     // ImageCard(painter = painter, contentDescription = description, title = title)
-                    TextStyling(text = "Alfredo")
+                    //TextStyling(text = "Alfredo")
+                    ColorBox(
+                        Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                    ){
+                        color.value = it
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .background(color.value)
+                            .weight(1f)
+                            .fillMaxSize()
+                    )
 
 
                     Row(
@@ -216,13 +240,13 @@ fun TextStyling(
         Text(
             text = buildAnnotatedString {
 
-               //Style individual parts of text :
+                //Style individual parts of text :
                 withStyle(
                     style = SpanStyle(
                         color = Color.Green,
                         fontSize = 30.sp
                     )
-                ){
+                ) {
                     append("J")
                 } // withStyle end here below texts will be in default style.
                 append("etpack ")
@@ -234,5 +258,32 @@ fun TextStyling(
             textAlign = TextAlign.Center,
             textDecoration = TextDecoration.Underline
         )
+    }
+}
+
+
+@Composable
+fun ColorBox(
+    modifier: Modifier = Modifier,
+    updateColor: (Color) -> Unit
+) {
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Red)
+            .clickable {
+                updateColor(
+                    Color(
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                        alpha = 1f
+                    )
+                )
+
+            }
+    ) {
+
     }
 }
