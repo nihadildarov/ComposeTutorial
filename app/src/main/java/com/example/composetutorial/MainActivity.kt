@@ -12,8 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,7 +37,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -46,86 +53,112 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            ComposeTutorialTheme {
-                val snackBarHostState = remember {
-                    SnackbarHostState()
-                }
+//            ComposeTutorialTheme {
+//
+//                val snackBarHostState = remember {
+//                    SnackbarHostState()
+//                }
+//
+//                var textFieldState by remember {
+//                    mutableStateOf("")
+//                }
+//                val snackBarScope = rememberCoroutineScope()
+//                Scaffold(
+//                    modifier = Modifier
+//                        .fillMaxSize(),
+//                    snackbarHost = {
+//                        SnackbarHost(snackBarHostState) { data ->
+//                            Snackbar(
+//                                containerColor = Color.Black,
+//                                actionColor = Color.White,
+//                                snackbarData = data
+//                            )
+//                        }
+//                    }
+//                ) {
+//                    Column(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .padding(it)
+//                            ,
+//                        horizontalAlignment = Alignment.CenterHorizontally,
+//                        verticalArrangement = Arrangement.Center
+//                    ) {
+//
+//                        OutlinedTextField(
+//                            value = textFieldState,
+//                            label = {
+//                                Text(text = "Enter name")
+//                            },
+//                            onValueChange = {
+//                                textFieldState = it
+//                            },
+//                            singleLine = true,
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .padding(horizontal = 10.dp)
+//                        )
+//
+//
+//                            Spacer(modifier = Modifier
+//                                .height(4.dp)
+//                                .fillMaxWidth())
+//                            Button(
+//                                modifier = Modifier
+//                                    .fillMaxWidth()
+//                                    .padding(horizontal = 10.dp),
+//                                onClick = {
+//                                    snackBarScope.launch {
+//                                        val snackBarResult = snackBarHostState.showSnackbar(
+//                                            message = "Congratulations! $textFieldState has created!",
+//                                            withDismissAction = true,
+//                                            actionLabel = "Cancel")
+//
+//                                        if(snackBarResult == SnackbarResult.ActionPerformed){
+//                                            snackBarHostState.showSnackbar("Action Canceled.")
+//                                        }
+//                                    }
+//                                }
+//                            ) {
+//                                Text(
+//                                    text = if (textFieldState.isBlank()) {
+//                                    "Create"
+//                                } else {
+//                                    "Create \"$textFieldState\""
+//                                }
+//                                )
+//                        }
+//                    }
+//                }
+//            }
 
-                var textFieldState by remember {
-                    mutableStateOf("")
-                }
-                val snackBarScope = rememberCoroutineScope()
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    snackbarHost = {
-                        SnackbarHost(snackBarHostState) { data ->
-                            Snackbar(
-                                containerColor = Color.Black,
-                                actionColor = Color.White,
-                                snackbarData = data
-                            )
-                        }
-                    }
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(it)
-                            ,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
 
-                        OutlinedTextField(
-                            value = textFieldState,
-                            label = {
-                                Text(text = "Enter name")
-                            },
-                            onValueChange = {
-                                textFieldState = it
-                            },
-                            singleLine = true,
+
+
+                // For showing list please comment above codes
+
+                LazyColumn {
+
+                    itemsIndexed(
+                        listOf("this","is","jetpack","compose")
+                    ){
+                        index,string->
+
+                        Text(
+                            text = string,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 10.dp)
-                        )
+                                .padding(vertical = 24.dp))
 
-
-                            Spacer(modifier = Modifier
-                                .height(4.dp)
-                                .fillMaxWidth())
-                            Button(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 10.dp),
-                                onClick = {
-                                    snackBarScope.launch {
-                                        val snackBarResult = snackBarHostState.showSnackbar(
-                                            message = "Congratulations! $textFieldState has created!",
-                                            withDismissAction = true,
-                                            actionLabel = "Cancel")
-
-                                        if(snackBarResult == SnackbarResult.ActionPerformed){
-                                            snackBarHostState.showSnackbar("Action Canceled.")
-                                        }
-                                    }
-                                }
-                            ) {
-                                Text(
-                                    text = if (textFieldState.isBlank()) {
-                                    "Create"
-                                } else {
-                                    "Create \"$textFieldState\""
-                                }
-                                )
-                        }
                     }
                 }
             }
         }
     }
-}
+
 
 
 
