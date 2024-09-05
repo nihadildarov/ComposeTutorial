@@ -16,8 +16,9 @@ fun DisposableEffectDemo() {
                 println("On pause called")
             }
         }
+        lifecycleOwner.lifecycle.addObserver(observer)
         onDispose {
-            lifecycleOwner.lifecycle.addObserver(observer)
+            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 }

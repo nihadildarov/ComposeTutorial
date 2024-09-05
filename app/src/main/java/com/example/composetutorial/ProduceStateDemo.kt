@@ -2,10 +2,8 @@ package com.example.composetutorial
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.produceState
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flow
 
 @Composable
 fun produceStateDemo (countUpTo:Int): State<Int>{
