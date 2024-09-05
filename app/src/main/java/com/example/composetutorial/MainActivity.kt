@@ -7,10 +7,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,11 +45,36 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeTutorialTheme {
+                var percentageState by remember {
+                    mutableStateOf(0f)
+                }
+
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier.fillMaxSize()
-                ){
-                    CircularProgressBar(percentage = 0.05f, number = 100)
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressBar(percentage = percentageState, number = 100)
+                        OutlinedTextField(
+                            modifier = Modifier,
+                            value = percentageState.toString(),
+                            label = ({ Text("Enter percentage") }),
+                            onValueChange = {
+                                percentageState = it.toFloat()
+                            }
+
+                        )
+
+                        Button(onClick = {
+                            percentageState += 0.1f
+                        }) {
+                            Text("Increase by 10%")
+                        }
+                    }
                 }
             }
         }
@@ -90,13 +120,14 @@ fun CircularProgressBar(
                 sweepAngle = 360 * curPercentage.value,
                 useCenter = false,
                 style =
-                    Stroke(
-                        width = strokeWidth.toPx(),
-                        cap = StrokeCap.Round
-                    )
+                Stroke(
+                    width = strokeWidth.toPx(),
+                    cap = StrokeCap.Round
+                )
             )
         }
-        Text(text =  (curPercentage.value * number).toInt().toString(),
+        Text(
+            text = (curPercentage.value * number).toInt().toString(),
             color = Color.Black,
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
