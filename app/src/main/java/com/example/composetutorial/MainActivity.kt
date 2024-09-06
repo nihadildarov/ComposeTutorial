@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -188,8 +189,10 @@ fun percentageInput():Float {
     } else {
         // Display the percentage value
         Text(
+
             text = "Percentage: ${percentage * 100}%",
-            modifier = Modifier.padding(start = 16.dp, top = 8.dp)
+            modifier = Modifier.padding(vertical = 16.dp).fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
     }
     return percentage
