@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Canvas
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTutorialTheme {
                 var percentageState by remember {
-                    mutableStateOf(0f)
+                    mutableFloatStateOf(0f)
                 }
 
                 Box(
