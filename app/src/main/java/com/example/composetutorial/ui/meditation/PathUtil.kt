@@ -1,4 +1,4 @@
-package com.example.composetutorial
+package com.example.composetutorial.ui.meditation
 
 
 import androidx.compose.ui.geometry.Offset

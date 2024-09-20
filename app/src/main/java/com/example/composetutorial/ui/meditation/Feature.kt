@@ -1,4 +1,4 @@
-package com.example.composetutorial.ui
+package com.example.composetutorial.ui.meditation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
