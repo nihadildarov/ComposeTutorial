@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.composetutorial.ui.dropdown.DropDown
+import com.example.composetutorial.ui.instagram.ProfileScreen
 import com.example.composetutorial.ui.meditation.HomeScreen
 import com.example.composetutorial.ui.timer.Timer
 
@@ -26,11 +27,25 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             //HomeScreen()
-
-//            Surface (
+//
+//
+//
+//            Surface(
 //                color = Color(0xFF101010),
 //                modifier = Modifier.fillMaxSize()
 //            ) {
+//                DropDown (text = "Tap to open",
+//                    modifier = Modifier.padding(15.dp)){
+//                    Text(
+//                        text = "This is now visible",
+//                        color = Color.White,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .height(100.dp)
+//                            .background(Color.DarkGray)
+//                    )
+//                }
+//
 //                Box(
 //                    contentAlignment = Alignment.Center,
 //                ){
@@ -43,25 +58,7 @@ class MainActivity : ComponentActivity() {
 //                      )
 //                }
 //            }
-
-
-            Surface(
-                color = Color(0xFF101010),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                DropDown (text = "Hello World!",
-                    modifier = Modifier.padding(15.dp)){
-                    Text(
-                        text = "This is now visible",
-                        color = Color.White,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp)
-                            .background(Color.DarkGray)
-                    )
-                }
-            }
-
+                ProfileScreen()
         }
     }
 }
